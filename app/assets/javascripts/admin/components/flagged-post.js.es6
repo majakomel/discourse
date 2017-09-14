@@ -1,7 +1,9 @@
 import showModal from 'discourse/lib/show-modal';
 
 export default Ember.Component.extend({
+  adminTools: Ember.inject.service(),
   expanded: false,
+  suspended: false,
 
   tagName: 'div',
   classNameBindings: [
@@ -44,6 +46,18 @@ export default Ember.Component.extend({
       this.get('flaggedPost').expandHidden().then(() => {
         this.set('expanded', true);
       });
+    },
+
+    showSuspendModal() {
+      let post = this.get('flaggedPost');
+      let user = post.get('user');
+      this.get('adminTools').showSuspendModal(
+        user,
+        {
+          post,
+          successCallback: result => this.set('suspended', result.suspended)
+        }
+      );
     }
   }
 });
