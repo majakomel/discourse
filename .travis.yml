@@ -8,6 +8,7 @@ branches:
     - master
     - beta
     - stable
+    - ember
 
 env:
   global:
@@ -25,10 +26,10 @@ addons:
   apt:
     update: true
     packages:
-    - gifsicle
-    - jpegoptim
-    - optipng
-    - jhead
+      - gifsicle
+      - jpegoptim
+      - optipng
+      - jhead
 
 matrix:
   fast_finish: true
